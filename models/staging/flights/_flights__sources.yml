@@ -1,9 +1,10 @@
 sources:
   - name: demo_src
+    schema: demo_src
     description: "Source tables for the flights database"
     tables:
       - name: aircrafts
-        description: '{{docs("Таблица с моделями самолётов")}}'
+        description: "Aircrafts table"
         columns:
           - name: aircraft_code
             description: >
@@ -37,3 +38,16 @@ sources:
             description: "Aircraft code"
           - name: seat_no
             description: "Seat number"
+      - name: bookings
+        columns:
+          - name: book_ref
+            description: "Booking reference"
+          - name: book_date
+            description: "Booking date"
+          - name: total_amount
+            description: "Total amount"
+        freshness: # make this a little more strict
+          warn_after: { count: 6, period: hour }
+          error_after: { count: 12, period: hour }
+          filter: curent_timestamp::date - book_date::date < 30000
+        loaded_at_field: book_date::timestamp

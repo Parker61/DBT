@@ -1,9 +1,11 @@
 {
-    "python.defaultInterpreterPath": "./dbt-env/Scripts/python.exe",
+    "python.defaultInterpreterPath": "../dbt-env/Scripts/python.exe",
     "python.terminal.activateEnvironment": true,
-    "dbt.dbtIntegration": "core",
-    "dbt.dbtPythonPathOverride": "./dbt-env/Scripts/python.exe",
+    "dbt.dbtPath": "../dbt-env/Scripts/dbt.exe",
+    "dbt.dbtExecutablePath": "../dbt-env/Scripts/dbt.exe",
+    "dbt.dbtPythonPath": "../dbt-env/Scripts/python.exe",
     "dbt.queryLimit": 500,
+    "dbt.enableNewLineagePanel": false,
     "files.associations": {
         "*.sql": "jinja-sql"
     },
