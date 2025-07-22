@@ -1,0 +1,42 @@
+
+models:
+  - name: fct_ticket_flights
+    description: "Связь билетов и рейсов"
+    docs:
+      show: true
+      node_color: "green"
+    config:
+        contract: {enforced: true}
+    meta:
+      owner: "kovalchukpv61@gmail.com"
+
+
+
+
+    columns:
+      - name: ticket_no
+        data_type: bpchar(13)
+        description: "Номер билета"
+        constraints:
+          - type: unique
+        
+      - name: flight_id
+        description: "ID рейса"
+        data_type: int4
+        constraints:
+          - type: not_null
+
+      - name: fare_conditions
+        data_type: varchar(10)
+        description: "Класс обслуживания"
+
+      - name: amount
+        data_type: numeric(10,2)
+        description: "Стоимость билета"
+        constraints:
+          - type: check
+            expression: "amount > 0"
+        tests:
+          - not_null
+        meta:
+          owner: "finance"
