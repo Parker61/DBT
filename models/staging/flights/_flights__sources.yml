@@ -47,7 +47,7 @@ sources:
           - name: total_amount
             description: "Total amount"
         freshness: # make this a little more strict
-          warn_after: { count: 6, period: hour }
-          error_after: { count: 12, period: hour }
-          filter: curent_timestamp::date - book_date::date < 30000
+          warn_after: { count: 10000, period: day }
+          error_after: { count: 10000, period: day }
+          filter: current_timestamp::date - book_date::date < 30000
         loaded_at_field: book_date::timestamp
