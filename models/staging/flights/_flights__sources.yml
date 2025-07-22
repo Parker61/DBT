@@ -1,0 +1,39 @@
+sources:
+  - name: demo_src
+    description: "Source tables for the flights database"
+    tables:
+      - name: aircrafts
+        description: '{{docs("Таблица с моделями самолётов")}}'
+        columns:
+          - name: aircraft_code
+            description: >
+              Aircraft code
+               and primary key
+               <br>
+            tests:
+              - not_null
+              - unique
+          - name: model
+            description: "*Aircraft model*"
+          - name: "range"
+            description: "_Aircraft range_"
+      - name: airports
+        description: "Airports table"
+        columns:
+          - name: airport_code
+            description: "Airport code"
+          - name: airport_name
+            description: "Airport name"
+          - name: city
+            description: "City"
+          - name: coordinates
+            description: "Coordinates"
+          - name: timezone
+            description: "Timezone"
+      - name: seats
+        description: "Seats table"
+        columns:
+          - name: aircraft_code
+            description: "Aircraft code"
+          - name: seat_no
+            description: "Seat number"

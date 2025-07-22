@@ -1,0 +1,12 @@
+{
+    "python.defaultInterpreterPath": "./dbt-env/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "dbt.dbtIntegration": "core",
+    "dbt.dbtPythonPathOverride": "./dbt-env/Scripts/python.exe",
+    "dbt.queryLimit": 500,
+    "files.associations": {
+        "*.sql": "jinja-sql"
+    },
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "terminal.integrated.defaultProfile.windows": "PowerShell"
+}
