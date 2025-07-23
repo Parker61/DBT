@@ -1,0 +1,13 @@
+seeds:
+  - name: id_passenger
+    config:
+      schema: seeds
+      database: dwh_flights
+      file: id_passenger.csv
+      column_types:
+        passenger_id: varchar(20)
+      columns:
+        - name: passenger_id
+          tests:
+            - not_null
+            - unique
