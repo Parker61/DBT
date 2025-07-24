@@ -1,0 +1,78 @@
+version: 2
+
+snapshots:
+  # Snapshot для справочника самолётов
+  - name: dim_aircrafts
+    description: "Справочник самолётов с отслеживанием исторических изменений (SCD Type 2)"
+    config:
+      target_schema: snapshot
+      unique_key: aircraft_code
+      strategy: check
+      check_cols: ["model", "range"]
+      dbt_valid_to_current: "to_date('9999-12-31', 'YYYY-MM-DD')"
+      hard_deletes: "new_record"
+      snapshot_meta_column_names:
+        dbt_valid_from: "start_date"
+        dbt_valid_to: "end_date"
+        dbt_scd_id: "scd_id"
+        dbt_updated_at: "modified_date"
+        dbt_is_deleted: "is_deleted"
+    columns:
+      # Бизнес-колонки
+      - name: aircraft_code
+        description: "Уникальный код самолёта (первичный ключ)"
+        data_type: varchar(3)
+      - name: model
+        description: "Модель самолёта (отслеживается на изменения)"
+        data_type: text
+      - name: range
+        description: "Дальность полёта самолёта в км (отслеживается на изменения)"
+        data_type: integer
+
+      # Мета-колонки snapshot
+      - name: start_date
+        description: "Дата начала действия записи (dbt_valid_from)"
+        data_type: timestamp
+      - name: end_date
+        description: "Дата окончания действия записи (dbt_valid_to). Для текущих записей = 9999-12-31"
+        data_type: date
+      - name: scd_id
+        description: "Уникальный идентификатор версии записи (dbt_scd_id)"
+        data_type: text
+      - name: modified_date
+        description: "Время последнего обновления записи (dbt_updated_at)"
+        data_type: timestamp
+      - name: is_deleted
+        description: "Флаг удалённой записи (dbt_is_deleted). True = запись удалена из источника"
+        data_type: boolean
+
+  # Snapshot для мест в самолётах
+  - name: dim_aircraft_seats
+    description: "Справочник мест в самолётах с отслеживанием исторических изменений (SCD Type 2)"
+    config:
+      target_schema: snapshot
+      unique_key: aircraft_code
+      strategy: check
+      check_cols: ["seat_no", "fare_conditions"]
+      snapshot_meta_column_names:
+        dbt_valid_from: "dbt_effective_date_from"
+        dbt_valid_to: "dbt_effective_date_to"
+    columns:
+      # Бизнес-колонки
+      - name: aircraft_code
+        description: "Код самолёта (связь с dim_aircrafts)"
+        data_type: varchar(3)
+      - name: seat_no
+        description: "Номер места в самолёте (отслеживается на изменения)"
+        data_type: varchar(4)
+      - name: fare_conditions
+        description: "Класс обслуживания места: Economy, Comfort, Business (отслеживается на изменения)"
+        data_type: varchar(10)
+
+      # Мета-колонки snapshot
+      - name: dbt_effective_date_from
+        description: "Дата начала действия записи"
+        data_type: timestamp
+      - name: dbt_effective_date_to
+        description: "Дата окончания действия записи. NULL для текущих записей"
+        data_type: timestamp

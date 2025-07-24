@@ -36,4 +36,4 @@ models:
       +materialized: table
 
 seeds:
-  schema: seed
+  schema: seeds
