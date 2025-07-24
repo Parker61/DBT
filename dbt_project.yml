@@ -34,6 +34,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   dbt_study:
+    +meta:
+      owner: "kovalchukpv61@gmail.com"
+      year_created: 2025
     # Config indicated by + and applies to all files under models/staging/
     staging:
       +materialized: table
@@ -44,4 +47,5 @@ models:
 
 
 seeds:
+  dbt_study:
   schema: seeds
