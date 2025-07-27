@@ -1,5 +1,5 @@
 {{ config(
-    materialized='table'
+    materialized = 'table'
 ) }}
 
 SELECT 
@@ -7,4 +7,4 @@ SELECT
     flight_id,
     fare_conditions,
     amount
-FROM {{ ref('stg_flights__ticket_flights') }} 
+FROM {{ ref('stg_flights__ticket_flights') }}
