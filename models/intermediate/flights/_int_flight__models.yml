@@ -40,3 +40,59 @@ models:
               inclusive: false
         meta:
           owner: "finance"
+
+  - name: fct_flights
+    description: "Фактовая таблица рейсов"
+    docs:
+      show: true
+      node_color: "blue"
+    meta:
+      owner: "kovalchukpv61@gmail.com"
+    tests:
+      - dbt_utils.equal_rowcount:
+          compare_model: ref('stg_flights__flights')
+    columns:
+      - name: flight_id
+        description: "ID рейса"
+        tests:
+          - not_null
+      - name: flight_no
+        description: "Номер рейса"
+      - name: scheduled_departure
+        description: "Плановое время вылета"
+      - name: scheduled_arrival
+        description: "Плановое время прилёта"
+      - name: departure_airport
+        description: "Аэропорт вылета"
+      - name: arrival_airport
+        description: "Аэропорт прилёта"
+      - name: status
+        description: "Статус рейса"
+      - name: aircraft_code
+        description: "Код самолёта"
+      - name: actual_departure
+        description: "Фактическое время вылета"
+      - name: actual_arrival
+        description: "Фактическое время прилёта"
+
+  - name: fct_booking
+    description: "Фактовая таблица бронирований"
+    docs:
+      show: true
+      node_color: "orange"
+    meta:
+      owner: "kovalchukpv61@gmail.com"
+    columns:
+      - name: book_ref
+        description: "Номер бронирования"
+        tests:
+          - not_null
+      - name: book_date
+        description: "Дата бронирования"
+      - name: total_amount
+        description: "Общая сумма бронирования"
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
