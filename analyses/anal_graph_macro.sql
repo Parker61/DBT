@@ -1,0 +1,1 @@
+{{ count_project_objects() }}

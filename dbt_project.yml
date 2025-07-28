@@ -26,6 +26,20 @@ clean-targets: # directories to be removed by `dbt clean`
 
 models:
   dbt_study:
+    +post-hook:
+      - |
+        CREATE SCHEMA IF NOT EXISTS logs;
+        CREATE TABLE IF NOT EXISTS {{ target.database }}.logs.dbt_logs (
+            event_date timestamp,
+            event_name varchar(100),
+            node_name varchar(256)
+        );
+        INSERT INTO {{ target.database }}.logs.dbt_logs
+        (event_date, event_name, node_name)
+        VALUES (
+            CURRENT_TIMESTAMP, 'finish run model', '{{ this.name }}'
+        );
+      - "{{ check_dependencies(this.name) }}"
     +meta:
       owner: "kovalchukpv61@gmail.com"
       year_created: 2025
