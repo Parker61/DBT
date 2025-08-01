@@ -31,6 +31,9 @@ sources:
             description: "Coordinates"
           - name: timezone
             description: "Timezone"
+            tests:
+              - dbt_utils.not_empty_string
+
       - name: seats
         description: "Seats table"
         columns:
