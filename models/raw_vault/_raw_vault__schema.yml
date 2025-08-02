@@ -1,0 +1,108 @@
+version: 2
+
+models:
+  - name: hub_airports
+    description: "Hub таблица для аэропортов (AutomateDV)"
+    columns:
+      - name: AIRPORT_HK
+        description: "Хеш-ключ аэропорта"
+        tests:
+          - not_null
+          - unique
+      - name: airport_code
+        description: "Код аэропорта (натуральный ключ)"
+        tests:
+          - not_null
+      - name: LOAD_DATETIME
+        description: "Время загрузки записи"
+        tests:
+          - not_null
+      - name: SOURCE
+        description: "Источник данных"
+        tests:
+          - not_null
+
+  - name: hub_airports_simple
+    description: "Hub таблица для аэропортов (простая версия)"
+    columns:
+      - name: AIRPORT_HK
+        description: "Хеш-ключ аэропорта"
+        tests:
+          - not_null
+          - unique
+      - name: airport_code
+        description: "Код аэропорта (натуральный ключ)"
+        tests:
+          - not_null
+      - name: LOAD_DATETIME
+        description: "Время загрузки записи"
+        tests:
+          - not_null
+      - name: SOURCE
+        description: "Источник данных"
+        tests:
+          - not_null
+
+  - name: sattelit_airports
+    description: "Satellite таблица для аэропортов (AutomateDV)"
+    columns:
+      - name: AIRPORT_HK
+        description: "Хеш-ключ аэропорта"
+        tests:
+          - not_null
+      - name: AIRPORT_HASHDIFF
+        description: "Хеш-разность для отслеживания изменений"
+        tests:
+          - not_null
+      - name: airport_name
+        description: "Название аэропорта"
+      - name: city
+        description: "Город"
+      - name: coordinates
+        description: "Координаты"
+      - name: timezone
+        description: "Часовой пояс"
+      - name: EFFECTIVE_FROM
+        description: "Дата начала действия записи"
+        tests:
+          - not_null
+      - name: LOAD_DATETIME
+        description: "Время загрузки записи"
+        tests:
+          - not_null
+      - name: SOURCE
+        description: "Источник данных"
+        tests:
+          - not_null
+
+  - name: sattelit_airports_simple
+    description: "Satellite таблица для аэропортов (простая версия)"
+    columns:
+      - name: AIRPORT_HK
+        description: "Хеш-ключ аэропорта"
+        tests:
+          - not_null
+      - name: AIRPORT_HASHDIFF
+        description: "Хеш-разность для отслеживания изменений"
+        tests:
+          - not_null
+      - name: airport_name
+        description: "Название аэропорта"
+      - name: city
+        description: "Город"
+      - name: coordinates
+        description: "Координаты"
+      - name: timezone
+        description: "Часовой пояс"
+      - name: EFFECTIVE_FROM
+        description: "Дата начала действия записи"
+        tests:
+          - not_null
+      - name: LOAD_DATETIME
+        description: "Время загрузки записи"
+        tests:
+          - not_null
+      - name: SOURCE
+        description: "Источник данных"
+        tests:
+          - not_null

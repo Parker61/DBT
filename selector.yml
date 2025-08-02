@@ -1,0 +1,48 @@
+selectors:
+  - name: failed_tests_with_their_models
+    definition: "1+result:fail"
+
+  # Селектор для измененных моделей (если есть git)
+  - name: modified_models
+    definition: "state:modified"
+    description: "Модели, которые были изменены с момента последнего коммита"
+
+  # Селектор для всех Data Vault моделей
+  - name: data_vault_models
+    definition: "tag:raw_vault"
+    description: "Все модели Data Vault архитектуры"
+
+  # Селектор для stage моделей
+  - name: stage_models
+    definition: "tag:staging"
+    description: "Все stage модели"
+
+  # Селектор для аэропортов
+  - name: airports_models
+    definition: "airports"
+    description: "Все модели, связанные с аэропортами"
+
+  # Селектор для простых Data Vault моделей (без AutomateDV)
+  - name: simple_data_vault
+    definition: "simple"
+    description: "Простые версии Data Vault моделей без внешних зависимостей"
+
+  # Селектор для всех моделей с тестами
+  - name: models_with_tests
+    definition: "1+test_type:generic"
+    description: "Модели, которые имеют generic тесты"
+
+  # Селектор для incremental моделей
+  - name: incremental_models
+    definition: "config.materialized:incremental"
+    description: "Все incremental модели"
+
+  # Селектор для table моделей
+  - name: table_models
+    definition: "config.materialized:table"
+    description: "Все модели, материализованные как таблицы"
+
+  # Селектор для view моделей
+  - name: view_models
+    definition: "config.materialized:view"
+    description: "Все модели, материализованные как представления"

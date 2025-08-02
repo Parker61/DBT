@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: raw_airports
+    description: "Raw stage модель для аэропортов"
+    columns:
+      - name: airport_code
+        description: "Код аэропорта"
+        tests:
+          - not_null
+      - name: airport_name
+        description: "Название аэропорта"
+      - name: city
+        description: "Город"
+      - name: coordinates
+        description: "Координаты"
+      - name: timezone
+        description: "Часовой пояс"
+      - name: RECORD_SOURCE
+        description: "Источник записи"
+        tests:
+          - not_null
+      - name: LOAD_DATE
+        description: "Дата загрузки"
+        tests:
+          - not_null
+
+  - name: v_stg_flights__airports
+    description: "Stage view для аэропортов с хешированием"
+    columns:
+      - name: AIRPORT_HK
+        description: "Хеш-ключ аэропорта"
+        tests:
+          - not_null
+      - name: AIRPORT_HASHDIFF
+        description: "Хеш-разность для отслеживания изменений"
+        tests:
+          - not_null
+      - name: airport_code
+        description: "Код аэропорта"
+        tests:
+          - not_null
+      - name: airport_name
+        description: "Название аэропорта"
+      - name: city
+        description: "Город"
+      - name: coordinates
+        description: "Координаты"
+      - name: timezone
+        description: "Часовой пояс"
+      - name: SOURCE
+        description: "Источник данных"
+        tests:
+          - not_null
+      - name: LOAD_DATETIME
+        description: "Время загрузки"
+        tests:
+          - not_null
+      - name: EFFECTIVE_FROM
+        description: "Дата начала действия"
+        tests:
+          - not_null

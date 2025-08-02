@@ -19,7 +19,6 @@ snapshot-paths: ["snapshots"]
 
 clean-targets: # directories to be removed by `dbt clean`
   - "target"
-  - "dbt_packages"
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -56,7 +55,29 @@ models:
       +materialized: table
       +tags: ["marts"]
       +schema: marts # ← Создаст схему marts
+    raw_vault:
+      +materialized: table
+      +tags: ["raw_vault"]
+      +schema: raw_vault # ← Создаст схему raw_vault
+    raw_stage:
+      +materialized: table
+      +tags: ["raw_stage"]
+      +schema: raw_stage # ← Создаст схему raw_stage
+    stage:
+      +materialized: view
+      +tags: ["stage"]
+      +schema: stage # ← Создаст схему stage
 
 seeds:
   dbt_study:
     +schema: seeds # ← Схема для seeds
+
+# AutomateDV configuration
+vars:
+  automate_dv:
+    enable_automate_dv: true
+    enable_automate_dv_logging: true
+    target_database: "{{ target.database }}"
+    target_schema: "{{ target.schema }}"
+
+on-run-end: "{{ dbt_project_evaluator.print_dbt_project_evaluator_issues() }}"
