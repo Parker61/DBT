@@ -106,3 +106,4 @@ models:
         description: "Источник данных"
         tests:
           - not_null
+          - dbt_utils.not_empty_string # Этот тест может упасть, если есть пустые строки
