@@ -13,7 +13,7 @@
     
     {% do log('Уникальные статусы полетов: ' ~ status_values, info=True) %}
     
-    INSERT INTO {{ target.database }}.logs.dbt_logs
+    INSERT INTO {{ target.database }}.{{ target.schema }}.dbt_logs
     (event_date, event_name, node_name)
     VALUES (
         CURRENT_TIMESTAMP, '{{ statuses_string }}', '{{ this.name }}'
